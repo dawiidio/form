@@ -40,11 +40,11 @@ const DefaultFieldsContainer: FC<ContainerWithDeleteButtonInfo> = ({
     </div>
 );
 
-export type RenderFormArrayControlsRemoveButton = (
+export type RenderFormArrayControlsActions = (
     props: UseFieldArrayReturn & { removeEntry: () => void },
 ) => ReactNode;
 
-const DefaultRenderActions: RenderFormArrayControlsRemoveButton = ({
+const DefaultRenderActions: RenderFormArrayControlsActions = ({
     removeEntry,
     fields,
 }) => (
@@ -80,7 +80,7 @@ export interface FormArrayControlsProps {
     /**
      * Render function for action buttons
      */
-    renderActions?: RenderFormArrayControlsRemoveButton;
+    renderActions?: RenderFormArrayControlsActions;
     /**
      * Root container that wraps all the FormArrayControls component
      */

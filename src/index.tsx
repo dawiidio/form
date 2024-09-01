@@ -9,7 +9,7 @@ export { FormArray } from './FormArray.js';
 export type { FormArrayProps } from './FormArray.js';
 export type {
     FormArrayControlsProps,
-    RenderFormArrayControlsRemoveButton,
+    RenderFormArrayControlsActions,
     FormArrayControlsAddButton,
     FormArrayControlsContainer,
     ContainerWithDeleteButtonInfo,

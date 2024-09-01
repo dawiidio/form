@@ -37,7 +37,7 @@ write simple wrapper around it and use it as a form input.
 npm install @dawiidio/form
 ```
 
-## Usage
+## Quick example
 
 ```tsx
 import React, {useState} from 'react';
@@ -200,7 +200,6 @@ The `FormObject` component is used to create a nested form context within a form
 |------------|-------------------------------------------|-----------------------------|----------|-----------------------------------------------------------------------------|
 | `name`     | `string`                                  | N/A                         | Yes      | The name of the form object. This name will be used to create a nested context for the form fields within this object. |
 | `children` | `React.ReactNode`                         | N/A                         | Yes      | The form fields or other components that will be nested within this form object. |
-| `container`| `FormObjectContainer`                     | `DefaultFormObjectContainer`| No       | A custom container component to wrap the children. If not provided, the default container will be used. |
 
 ### Usage
 The `FormObject` component is used to create a nested form context within a form. It allows you to group form fields under a specific context, making it easier to manage and validate nested form structures.
@@ -486,4 +485,121 @@ const MyForm = () => {
 };
 
 export default MyForm;
+```
+
+## Sample port to custom grid and inputs
+
+```tsx
+import {Grid, GridItem} from "~/components/Grid/Grid";
+import React, {type FC, type PropsWithChildren} from "react";
+import {Input} from "~/components/Input/Input";
+import {array, object, string} from "yup";
+import {
+    Form,
+    FormArray,
+    FormArrayControls,
+    type FormArrayControlsAddButton,
+    FormInput,
+    FormObject,
+    type RenderFormArrayControlsActions,
+} from "@dawiidio/form";
+import {Button} from "~/components/button/Button";
+
+const schema = object({
+    notNestedField: string().required(),
+    obj: object({
+        objField: string().required(),
+    }).required(),
+    arr: array().of(object({
+       arrField: string().required(),
+    }))
+});
+
+const AddButton: FormArrayControlsAddButton = ({ addEntry }) => (
+    <GridItem colSpan={12}>
+        <Button style={{ marginTop: 15 }} onClick={addEntry}>
+            Add
+        </Button>
+    </GridItem>
+);
+const EntryContainer: FC<PropsWithChildren> = ({ children }) => (
+    <GridItem colSpan={12}>
+        <Grid alignItems={"end"}>{children}</Grid>
+    </GridItem>
+);
+const FieldsContainer: FC<PropsWithChildren> = ({ children }) => (
+    <GridItem colSpan={10}>{children}</GridItem>
+);
+const renderActions: RenderFormArrayControlsActions = ({
+    removeEntry,
+    fields,
+}) => (
+    <GridItem colSpan={2}>
+        <Button
+            onClick={removeEntry}
+            type="button"
+            disabled={fields.length === 1}
+        >
+            Remove
+        </Button>
+    </GridItem>
+);
+const FormArrayContainer: FC<PropsWithChildren> = ({ children }) => (
+    <GridItem colSpan={12}>
+        <Grid>{children}</Grid>
+    </GridItem>
+);
+
+const SubmitButton: FC = () => (
+    <Grid justifyContent='end'>
+        <GridItem colSpan={10}/>
+        <GridItem colSpan={2}>
+            <Button type='submit'>Submit</Button>
+        </GridItem>
+    </Grid>
+)
+
+export default function A() {
+    return (
+        <Form
+            onSubmit={(data) => {
+                console.log(data);
+            }}
+            schema={schema}
+            options={{}}
+            submitButton={SubmitButton}
+        >
+            <Grid>
+                <GridItem colSpan={12}>
+                    <FormInput name="notNestedField" component={Input} />
+                </GridItem>
+                <GridItem colSpan={12}>
+                    <FormObject name="obj">
+                        <FormInput name="objField" component={Input} />
+                    </FormObject>
+                </GridItem>
+            </Grid>
+            <FormArray name="arr" initialValue={{ arrField: 'Default value' }}>
+                <FormArrayControls
+                    addButton={AddButton}
+                    entryContainer={EntryContainer}
+                    fieldsContainer={FieldsContainer}
+                    renderActions={renderActions}
+                    container={FormArrayContainer}
+                    actionsVisible
+                >
+                    {() => (
+                        <GridItem colSpan={12}>
+                            <FormInput name="arrField" component={Input} />
+                            <FormObject name="obj">
+                                <FormInput name="objField" component={Input} />
+                            </FormObject>
+                        </GridItem>
+                    )}
+                </FormArrayControls>
+            </FormArray>
+        </Form>
+    );
+}
+
 ```
