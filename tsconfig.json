@@ -1,0 +1,30 @@
+{
+  "exclude": ["**/*.spec.ts", "**/*.spec.tsx"],
+  "include": ["src/**/*.ts", "src/**/*.tsx"],
+  "compilerOptions": {
+    "lib": ["DOM", "DOM.Iterable", "esnext"],
+    "types": [
+      "vitest/globals",
+      "node"
+    ],
+    "isolatedModules": true,
+    "esModuleInterop": true,
+    "noEmit": true,
+    "strict": true,
+    "baseUrl": "./",
+    "declaration": true,
+    "paths": {
+      "~/*": ["src/*"]
+    },
+    "forceConsistentCasingInFileNames": true,
+    "downlevelIteration": true,
+    "skipLibCheck": true,
+    "removeComments": true,
+    "rootDir": "src",
+    "outDir": "lib",
+    "jsx": "react",
+    "module": "es2015",
+    "target": "es2018",
+    "moduleResolution": "node"
+  },
+}

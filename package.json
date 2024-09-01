@@ -1,0 +1,66 @@
+{
+  "name": "@dawiidio/form",
+  "private": true,
+  "version": "0.0.1",
+  "type": "commonjs",
+  "main": "lib/index.cjs.js",
+  "module": "lib/index.es.js",
+  "scripts": {
+    "prepublishOnly": "npm run build",
+    "watch": "tsc -p ./tsconfig.json --watch",
+    "watch-alias": "tsc-alias -p ./tsconfig.json --watch",
+    "start": "node lib/index.js",
+    "build": "vite build",
+    "test": "vitest"
+  },
+  "types": "lib/index.d.ts",
+  "author": {
+    "email": "dawid@dawiid.io",
+    "name": "Dawid Wojda",
+    "url": "https://dawiid.io"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "keywords": [
+    "form",
+    "react",
+    "typescript",
+    "react-hook-form",
+    "form framework",
+    "form library",
+    "form validation",
+    "form builder"
+  ],
+  "license": "MIT",
+  "dependencies": {
+    "@hookform/resolvers": "^3.9.0",
+    "classnames": "^2.5.1",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "react-hook-form": "^7.53.0",
+    "vite-plugin-biome": "^1.0.12",
+    "vite-plugin-dts": "^4.1.0",
+    "vite-tsconfig-paths": "^5.0.1",
+    "vitest": "^2.0.5",
+    "yup": "^1.4.0"
+  },
+  "files": [
+    "lib",
+    "package.json"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/dawiidio/form"
+  },
+  "devDependencies": {
+    "@types/node": "^22.5.2",
+    "@types/react": "^18.3.3",
+    "@types/react-dom": "^18.3.0",
+    "@vitejs/plugin-react": "^4.3.1",
+    "globals": "^15.9.0",
+    "tsc-alias": "^1.8.10",
+    "typescript": "^5.5.3",
+    "vite": "^5.4.1"
+  }
+}
