@@ -1,6 +1,6 @@
 {
   "name": "@dawiidio/form",
-  "private": true,
+  "private": false,
   "version": "0.0.2",
   "type": "commonjs",
   "main": "lib/index.cjs.js",
