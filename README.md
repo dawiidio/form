@@ -192,6 +192,64 @@ export const MyForm = () => {
 };
 ```
 
+## useForm
+This hook allows you to manipulate data in the form, this ability Form component lacks, because you have no access to hooks like watch or setValue
+
+### Props
+| Name          | Type                                                                 | Default                | Required | Description                                                                 |
+|---------------|----------------------------------------------------------------------|------------------------|----------|-----------------------------------------------------------------------------|
+| `onSubmit`    | `(data: TFieldValues, event: SyntheticEvent<SubmitEvent, Event> \| undefined) => void \| Promise<void>` | N/A                    | Yes      | Function to handle form submission.                                         |
+| `onCancel`    | `() => void`                                                         | N/A                    | No       | Function to handle form cancellation.                                       |
+| `onError`     | `() => void`                                                         | N/A                    | No       | Function to handle form errors.                                             |
+| `defaultValues`| `DefaultValues<TFieldValues>`                                       | N/A                    | No       | Default values for the form fields.                                         |
+| `values`      | `DefaultValues<TFieldValues>`                                        | N/A                    | No       | Values for the form fields.                                                 |
+| `schema`      | `AnyObjectSchema`                                                    | N/A                    | Yes      | Validation schema using `yup`.                                              |
+| `submitButton`| `SubmitButtonFC`                                                     | `DefaultSubmitButton`  | No       | Custom submit button component.                                             |
+| `disabled`    | `boolean`                                                            | N/A                    | No       | Whether the form is disabled.                                               |
+
+### Usage
+The `useForm` hook is used to create a form context using `react-hook-form` and `yup` for validation. It provides a structured way to handle form submission, validation, and error handling.
+
+```tsx
+import React from 'react';
+import { useForm } from '@dawiidio/form';
+import { FormInput } from '@dawiidio/form';
+import Input from './Input';
+import * as yup from 'yup';
+
+export interface MyFormValues {
+    firstName: string;
+    lastName: string;
+}
+
+const schema = yup.object({
+    firstName: yup.string().required(),
+    lastName: yup.string().required(),
+});
+
+const defaultValues = {
+    firstName: 'John',
+    lastName: 'Doe',
+};
+
+export const MyForm = () => {
+    const { Form } = useForm<MyFormValues>({
+        onSubmit: (data) => {
+            console.log(data);
+        },
+        defaultValues,
+        schema,
+    });
+
+    return (
+        <Form>
+            <FormInput name="firstName" component={Input} />
+            <FormInput name="lastName" component={Input} />
+        </Form>
+    );
+};
+```
+
 ## FormObject
 The `FormObject` component is used to create a nested form context within a form. It allows you to group form fields under a specific context, making it easier to manage and validate nested form structures.
 

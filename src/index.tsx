@@ -18,3 +18,5 @@ export { FormArrayContext } from './FormArrayContext.js';
 export { useFormInputController } from './useFormInputController.js';
 export { FormInput } from './FormInput.js';
 export type { CommonFormInputProps, FormInputProps } from './FormInput.js';
+export {useForm} from './useForm.js';
+export type {UseFormProps} from './useForm.js';

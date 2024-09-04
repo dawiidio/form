@@ -1,5 +1,5 @@
-import React, {FC, PropsWithChildren, ReactNode, SyntheticEvent} from 'react';
-import {DefaultValues, FormProvider, useForm} from 'react-hook-form';
+import React, {type FC, type PropsWithChildren, type ReactNode, type SyntheticEvent} from 'react';
+import {type DefaultValues, FormProvider, useForm} from 'react-hook-form';
 import type {AnyObjectSchema} from 'yup';
 import {yupResolver} from '@hookform/resolvers/yup';
 import {CLASSNAMES} from "~/consts.js";
@@ -26,8 +26,9 @@ export interface FormProps<T extends Record<string, any>> {
     options?: UseFormProps<T>;
 }
 
-const DefaultSubmitButton: SubmitButtonFC = ({ disabled }) => <button disabled={disabled} className={CLASSNAMES.formSubmitButton} type="submit">Submit</button>;
+export const DefaultSubmitButton: SubmitButtonFC = ({ disabled }) => <button disabled={disabled} className={CLASSNAMES.formSubmitButton} type="submit">Submit</button>;
 
+// biome-ignore lint/suspicious/noExplicitAny: <explanation>
 export function Form<T extends Record<string, any>>({
     error,
     onError,
