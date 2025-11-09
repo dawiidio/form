@@ -2,9 +2,16 @@
   "name": "@dawiidio/form",
   "private": false,
   "version": "0.0.5",
-  "type": "commonjs",
+  "type": "module",
   "main": "lib/index.cjs.js",
   "module": "lib/index.es.js",
+  "exports": {
+    ".": {
+      "types": "./lib/index.d.ts",
+      "import": "./lib/index.es.js",
+      "require": "./lib/index.cjs.js"
+    }
+  },
   "scripts": {
     "prepublishOnly": "npm run build",
     "watch": "tsc -p ./tsconfig.json --watch",
@@ -35,15 +42,24 @@
   "license": "MIT",
   "dependencies": {
     "@hookform/resolvers": "^3.9.0",
-    "classnames": "^2.5.1",
-    "react": "^18.3.1",
-    "react-dom": "^18.3.1",
-    "react-hook-form": "^7.53.0",
-    "vite-plugin-biome": "^1.0.12",
-    "vite-plugin-dts": "^4.1.0",
-    "vite-tsconfig-paths": "^5.0.1",
-    "vitest": "^2.0.5",
-    "yup": "^1.4.0"
+    "classnames": "^2.5.1"
+  },
+  "peerDependencies": {
+    "react": ">=18.3.1",
+    "react-dom": ">=18.3.1",
+    "react-hook-form": ">=7.53.0",
+    "yup": ">=1.4.0"
+  },
+  "peerDependenciesMeta": {
+    "react": {
+      "optional": false
+    },
+    "react-dom": {
+      "optional": false
+    },
+    "react-hook-form": {
+      "optional": false
+    }
   },
   "files": [
     "lib",
@@ -61,6 +77,10 @@
     "globals": "^15.9.0",
     "tsc-alias": "^1.8.10",
     "typescript": "^5.5.3",
-    "vite": "^5.4.1"
+    "vite": "^5.4.1",
+    "vite-plugin-biome": "^1.0.12",
+    "vite-plugin-dts": "^4.1.0",
+    "vite-tsconfig-paths": "^5.0.1",
+    "vitest": "^2.0.5"
   }
 }

@@ -127,7 +127,8 @@ export const FormArrayControls: FunctionComponent<FormArrayControlsProps> = ({
             {formArrayCtx.fields.map((field, index) => (
                 <FormObject
                     key={field.id}
-                    name={`${formArrayCtx.name}.${index}.`}
+                    name={`${formArrayCtx.name}.${index}`}
+                    checkNestedObjects={false}
                 >
                     <EntryContainer>
                         <FieldsContainer actionsVisible={actionsVisible}>

@@ -30,6 +30,7 @@ export interface UseFormProps<TFieldValues extends FieldValues, TContext>
 export interface UseFormFormProps {
     error?: string | ReactNode;
     loading?: boolean;
+    method?: 'get' | 'post' | 'put' | 'delete';
 }
 
 export const useForm = <
